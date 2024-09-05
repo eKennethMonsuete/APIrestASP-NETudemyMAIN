@@ -1,0 +1,6 @@
+@APIrestASP_NETudemy_HostAddress = http://localhost:5002
+
+GET {{APIrestASP_NETudemy_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
