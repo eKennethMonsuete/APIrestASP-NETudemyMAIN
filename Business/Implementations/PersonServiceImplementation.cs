@@ -1,15 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+﻿using APIrestASP_NETudemy.Business;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using RestASPNETErudio.Model;
 using RestASPNETErudio.Model.Context;
 using System;
 
 namespace RestASPNETErudio.Business.Implementations
 {
-    public class PersonBusinessImplementation : APIrestASP_NETudemy.Business.IPersonBusiness
+    public class PersonBusinessImplementation : IPersonBusiness
     {
         private readonly IPersonRepository _repository;
 
-        
+        //APIrestASP_NETudemy.Business.
 
         public PersonBusinessImplementation(IPersonRepository repository) {
             _repository = repository;

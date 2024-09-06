@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using APIrestASP_NETudemy.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace RestASPNETErudio.Model.Context
 {
@@ -9,5 +10,9 @@ namespace RestASPNETErudio.Model.Context
         public MySQLContext(DbContextOptions<MySQLContext> options) : base(options){ }
 
         public DbSet<Person> Persons { get; set; }
+        public DbSet<Book> Books{ get; set; }
+            
+        
+        
     }
 }
