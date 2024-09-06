@@ -1,8 +1,8 @@
 ﻿using RestASPNETErudio.Model;
 
-namespace RestASPNETErudio.Services.Implementations
+namespace RestASPNETErudio.Business.Implementations
 {
-    public interface IPersonService
+    public interface IPersonRepository
     {
 
         Person Create(Person person);
@@ -14,6 +14,8 @@ namespace RestASPNETErudio.Services.Implementations
         Person Update(Person person);
 
         void Delete(long id);   
+
+        bool Exists(long id);   
        
     }
 }

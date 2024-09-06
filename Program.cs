@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using RestASPNETErudio;
 using RestASPNETErudio.Model.Context;
-using RestASPNETErudio.Services.Implementations;
+using RestASPNETErudio.Business.Implementations;
+using APIrestASP_NETudemy.Business;
+using RestASPNETErudio.Repository.Implementations;
 
 internal class Program
 {
@@ -17,13 +19,16 @@ internal class Program
 
 
 
-        builder.Services.AddScoped<IPersonService, PersonServiceImplementation>();
+        builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
+        builder.Services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
 
         builder.Services.AddDbContext<MySQLContext>(options =>
         {
             var connectionString = builder.Configuration.GetConnectionString("MySQLConnection");
             options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 29)));
         });
+
+        builder.Services.AddApiVersioning();
         
         var app = builder.Build();
 

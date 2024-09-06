@@ -1,15 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+﻿using APIrestASP_NETudemy.Business;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using RestASPNETErudio.Business.Implementations;
 using RestASPNETErudio.Model;
 using RestASPNETErudio.Model.Context;
 using System;
 
-namespace RestASPNETErudio.Services.Implementations
+namespace RestASPNETErudio.Repository.Implementations
 {
-    public class PersonServiceImplementation : IPersonService
+
+    public class PersonRepositoryImplementation : IPersonRepository
     {
         private MySQLContext _context;
 
-        public PersonServiceImplementation(MySQLContext context) {
+        // o Repository ficou apenas para a persistencia 
+        public PersonRepositoryImplementation(MySQLContext context) {
             _context = context;
         }
 
@@ -44,7 +48,7 @@ namespace RestASPNETErudio.Services.Implementations
 
         public Person Update(Person person)
         {
-            if (!Exists(person.Id)) return new Person();
+            if (!Exists(person.Id)) return null;
             var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(person.Id));
 
             if (result != null)
@@ -84,7 +88,7 @@ namespace RestASPNETErudio.Services.Implementations
 
         
 
-        private bool Exists(long id)
+        public bool Exists(long id)
         {
             return _context.Persons.Any(p => p.Id.Equals(id));
         }
