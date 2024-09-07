@@ -1,18 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using APIrestASP_NETudemy.Model.Base;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace APIrestASP_NETudemy.Model
 {
     [Table("books")]
-    public class Book
+    public class Book : BaseEntity
     {
-        [Column("id")]
-        public long Id { get; set; }
         
-        [Column("author"), Required]
+        
+        [Column("author")]
         public string Author { get; set; }
         
-        [Column("price"), Required]
+        [Column("price")]
         public decimal Price { get; set; }
 
         [Column("launch_date")]

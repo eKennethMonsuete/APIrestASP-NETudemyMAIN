@@ -9,8 +9,9 @@ using Serilog;
 using EvolveDb;
 
 using APIrestASP_NETudemy.Business.Implementations;
-using APIrestASP_NETudemy.Repository;
-using APIrestASP_NETudemy.Repository.Implementations;
+
+
+using APIrestASP_NETudemy.Repository.Generic;
 
 internal class Program
 {
@@ -27,7 +28,9 @@ internal class Program
         builder.Services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
 
         builder.Services.AddScoped<IBookBusiness, BookServiceImplementation>();
-        builder.Services.AddScoped<IBookRepository,BookRepositoryImplementation>();
+        
+
+        builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
         builder.Services.AddDbContext<MySQLContext>(options =>
         {
