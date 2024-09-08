@@ -3,7 +3,7 @@ using RestASPNETErudio;
 using RestASPNETErudio.Model.Context;
 using RestASPNETErudio.Business.Implementations;
 using APIrestASP_NETudemy.Business;
-using RestASPNETErudio.Repository.Implementations;
+
 
 using Serilog;
 using EvolveDb;
@@ -25,11 +25,7 @@ internal class Program
 
 
         builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
-        builder.Services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
-
         builder.Services.AddScoped<IBookBusiness, BookServiceImplementation>();
-        
-
         builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
         builder.Services.AddDbContext<MySQLContext>(options =>

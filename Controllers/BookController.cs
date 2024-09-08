@@ -1,4 +1,5 @@
 ﻿using APIrestASP_NETudemy.Business;
+using APIrestASP_NETudemy.Data.VO;
 using APIrestASP_NETudemy.Model;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
@@ -37,7 +38,7 @@ namespace APIrestASP_NETudemy.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Book book)
+        public IActionResult Post([FromBody] BookVO book)
         {
 
             if (book == null) return BadRequest();
@@ -45,7 +46,7 @@ namespace APIrestASP_NETudemy.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Book book)
+        public IActionResult Put([FromBody] BookVO book)
         {
 
             if (book == null) return BadRequest();

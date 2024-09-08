@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RestASPNETErudio.Model;
 using RestASPNETErudio.Business.Implementations;
 using APIrestASP_NETudemy.Business;
+using APIrestASP_NETudemy.Data.VO;
 
 namespace RestASPNETErudio.Controllers
 {
@@ -41,7 +42,7 @@ namespace RestASPNETErudio.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Person person )
+        public IActionResult Post([FromBody] PersonVO person )
         {
             
             if (person == null) return BadRequest();
@@ -49,7 +50,7 @@ namespace RestASPNETErudio.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Person person)
+        public IActionResult Put([FromBody] PersonVO person)
         {
 
             if (person == null) return BadRequest();

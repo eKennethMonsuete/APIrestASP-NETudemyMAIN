@@ -1,17 +1,18 @@
-﻿using APIrestASP_NETudemy.Model;
+﻿using APIrestASP_NETudemy.Data.VO;
+using APIrestASP_NETudemy.Model;
 using RestASPNETErudio.Model;
 
 namespace APIrestASP_NETudemy.Business
 {
     public interface IBookBusiness
     {
-        Book Create(Book book);
+        BookVO Create(BookVO book);
 
-        Book FindByID(long id);
+        BookVO FindByID(long id);
 
-        List<Book> FindAll();
+        List<BookVO> FindAll();
 
-        Book Update(Book book);
+        BookVO Update(BookVO book);
 
         void Delete(long id);
 
