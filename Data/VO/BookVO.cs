@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using APIrestASP_NETudemy.Hypermedia;
+using APIrestASP_NETudemy.Hypermedia.Abstract;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace APIrestASP_NETudemy.Data.VO
 {
-    public class BookVO
+    public class BookVO : ISupportHyperMedia
     {
 
         public long Id
@@ -32,5 +34,11 @@ namespace APIrestASP_NETudemy.Data.VO
         {
             get; set;
         }
+
+        public List<HyperMediaLink> Links
+        {
+            get;
+            set;
+        } = new List<HyperMediaLink>();
     }
 }

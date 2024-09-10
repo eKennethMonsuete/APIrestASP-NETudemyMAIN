@@ -4,6 +4,7 @@ using RestASPNETErudio.Model;
 using RestASPNETErudio.Business.Implementations;
 using APIrestASP_NETudemy.Business;
 using APIrestASP_NETudemy.Data.VO;
+using APIrestASP_NETudemy.Hypermedia.Filters;
 
 namespace RestASPNETErudio.Controllers
 {
@@ -28,12 +29,21 @@ namespace RestASPNETErudio.Controllers
 
 
         [HttpGet]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        [ProducesResponseType((200), Type = typeof(List<PersonVO>))]
+        [ProducesResponseType((204))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((401))]
         public IActionResult Get()
         {
             return Ok(_personBusiness.FindAll());
         }
 
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((401))]
         public IActionResult Get(long id)
         {
             var person = _personBusiness.FindByID(id);
@@ -42,6 +52,10 @@ namespace RestASPNETErudio.Controllers
         }
 
         [HttpPost]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((401))]
         public IActionResult Post([FromBody] PersonVO person )
         {
             
@@ -50,6 +64,10 @@ namespace RestASPNETErudio.Controllers
         }
 
         [HttpPut]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((401))]
         public IActionResult Put([FromBody] PersonVO person)
         {
 
@@ -58,6 +76,9 @@ namespace RestASPNETErudio.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ProducesResponseType((204))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((401))]
         public IActionResult Delete(long id)
         {
           

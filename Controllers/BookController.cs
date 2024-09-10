@@ -1,5 +1,6 @@
 ﻿using APIrestASP_NETudemy.Business;
 using APIrestASP_NETudemy.Data.VO;
+using APIrestASP_NETudemy.Hypermedia.Filters;
 using APIrestASP_NETudemy.Model;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
@@ -24,12 +25,14 @@ namespace APIrestASP_NETudemy.Controllers
         }
 
         [HttpGet]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
             return Ok(_bookBusiness.FindAll());
         }
 
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
             var book = _bookBusiness.FindByID(id);
@@ -38,6 +41,7 @@ namespace APIrestASP_NETudemy.Controllers
         }
 
         [HttpPost]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] BookVO book)
         {
 
@@ -46,6 +50,7 @@ namespace APIrestASP_NETudemy.Controllers
         }
 
         [HttpPut]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] BookVO book)
         {
 

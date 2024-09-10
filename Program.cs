@@ -12,16 +12,44 @@ using APIrestASP_NETudemy.Business.Implementations;
 
 
 using APIrestASP_NETudemy.Repository.Generic;
+using Microsoft.Net.Http.Headers;
+using APIrestASP_NETudemy.Hypermedia.Filters;
+using APIrestASP_NETudemy.Hypermedia.Enricher;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Rewrite;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        var appName = "Rest aPI RESTful with ASP.NET 9";
+        var appVersion = "v1";
+        var appDescription = $" qualquer coisa '{appName}'";
 
         // Add services to the container.
 
         builder.Services.AddControllers();
+
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc(
+                appVersion,
+                new OpenApiInfo
+                {
+                    Title = appName,
+                    Version = appVersion,
+                    Description = appDescription,
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Algum nome",
+                        Url = new Uri("https://github.com")
+                    }
+
+
+                });
+        });
 
 
         builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
@@ -40,11 +68,24 @@ internal class Program
 
         });
 
+        builder.Services.AddMvc(options =>
+        {
+            options.RespectBrowserAcceptHeader = true;
+            options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("application/xml"));
+            options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
+        }).AddXmlSerializerFormatters();
 
 
+        var filterOptions = new HyperMediaFilterOptions();
+        filterOptions.ContentResponseEnricherList.Add(new PersonEnricher());
+        filterOptions.ContentResponseEnricherList.Add(new BookEnricher());
+
+        builder.Services.AddSingleton(filterOptions);
 
 
         builder.Services.AddApiVersioning();
+
+
 
         var app = builder.Build();
 
@@ -52,9 +93,25 @@ internal class Program
 
         app.UseHttpsRedirection();
 
+        app.UseSwagger();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json",
+                $"{appName} - {appVersion}");
+
+        });
+
+        var option = new RewriteOptions();
+        option.AddRedirect("^$", "swagger");
+        app.UseRewriter(option);
+
+
         app.UseAuthorization();
 
         app.MapControllers();
+        app.MapControllerRoute("DefaultApi", "{controller=values}/v{version=apiVersion}/{id?}");
+
+       
 
         app.Run();
 
