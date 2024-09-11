@@ -5,11 +5,13 @@ using RestASPNETErudio.Business.Implementations;
 using APIrestASP_NETudemy.Business;
 using APIrestASP_NETudemy.Data.VO;
 using APIrestASP_NETudemy.Hypermedia.Filters;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RestASPNETErudio.Controllers
 {
     [ApiVersion("1")]
     [ApiController]
+    //[Authorize("Bearer")]
     [Route("api/[controller]/v{version:apiVersion}")]
     public class PersonController : ControllerBase
     {

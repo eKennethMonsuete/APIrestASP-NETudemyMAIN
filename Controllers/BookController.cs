@@ -3,6 +3,7 @@ using APIrestASP_NETudemy.Data.VO;
 using APIrestASP_NETudemy.Hypermedia.Filters;
 using APIrestASP_NETudemy.Model;
 using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestASPNETErudio.Model;
 
@@ -10,6 +11,7 @@ namespace APIrestASP_NETudemy.Controllers
 {
     [ApiVersion("1")]
     [ApiController]
+    [Authorize("Bearer")]
     [Route("api/[controller]/v{version:apiVersion}")]
     public class BookController : ControllerBase
     {
